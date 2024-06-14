@@ -1,0 +1,29 @@
+body {
+  color: #000;
+  background-color: #ccffee;
+  background: url('../css/images/background1.jpg'); 
+}
+
+input {
+  width: 70px;
+}
+
+.pr-input {
+  width: 50rem;
+}
+
+h2 {
+  margin-left: .5rem;
+}
+
+.table {
+  margin-left: 15px;
+}
+
+#addProducts {
+  margin-left: 2rem;
+  margin-right: 6rem;
+  display: flex;
+  justify-content: space-between;
+}
+

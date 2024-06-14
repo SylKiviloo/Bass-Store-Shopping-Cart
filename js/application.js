@@ -1,39 +1,78 @@
-$(document).ready(function () {
-
-  //$('tbody tr').each(function (i, element) {
-    //console.log($(element).children().eq(1).text());
-    //(this).children('.price').html(randomPrice); //trying to inject into .price
+var updateSubtotal = function (ele) {
+  var price = parseFloat($(ele).find('.price').text()); //get the .price text and the .quantity input value
+  var quantity = parseFloat($(ele).find('.quantity input').val()); //(swap .children for .find for input)
   
-  //});
+  var subtotals = price * quantity; //calculate
+  //console.log(subtotals)
+  $(ele).children('.subtotal').html(subtotals); //inject
+  
+  return subtotals;//return updated subtotal to DOM
+}
+
+var sum = function (acc, x) { return acc + x; };
+
+var updateTotal = function() { //a function to sum the subtotals and update the total
+  var subtotalArray = [];
+  $('tbody tr').each(function (i, ele) {
+    var subtotal = updateSubtotal(ele);
+    subtotalArray.push(subtotal);
+  });
+  var total = subtotalArray.reduce(sum);
+  //console.log(total);
+  $('#total').html(total);
+} 
+
+var randomPrice = function () {
   var number = Math.random() * (3000 - 300) + 300;
-  var randomNum = +number.toFixed(2);
-  console.log(randomNum) //showing a random number
+  var randomNum = +number.toFixed(0);
+  //console.log(randomNum) //showing a random whole number
+  return randomNum;
+}
+randomPrice();
 
- var subtotals = [];
+$(document).ready(function () {
+  updateTotal();
 
- $('tbody tr').each(function (i, element) {
-  
-  subtotals.push($('.quantity').text());
-  console.log(subtotals);
- });
-  //$('tbody tr').children().eq(1).text(randomPrice); //inject into .price?
-  //$('tbody tr').children('.price').text(randomPrice); //trying to inject into .price
-  //$('form span').children('.price').text(randomPrice); //inject into span?
+   $(document).on('click', '.btn.remove', function (event) {
+    $(this).closest('tr').remove();
+    updateTotal(); //update after a row is removed
+  });
 
-}); //end of document.ready
+  $('tr input').on('input', function () { //update upon input event
+    updateTotal();
+  });
 
-var randomPrice = function (element) { //should take a randomNum and inject into .price
-  //var number = Math.random() * (3000 - 300) + 300;
-  //var randomNum = +number.toFixed(2);
-  //console.log(randomNum) //showing 3 random numbers
-  $('tbody tr').children('.price').text();  
-  return randomPrice;
- }
- console.log(randomPrice())
+  var timeout;
+  $(document).on('input', 'tr input', function () { //set debounce, change to document
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      updateTotal();
+    }, 1000);
+});
 
- var findSubtotal = function () {
-  var subtotal = $('tbody tr').children('quantity').eq(0)
-  console.log(subtotal);
- }
- //subtotal()
- console.log(findSubtotal());
+$('#addProducts').on('submit', function (event) { //in #addProducts, on submit, run this function
+  event.preventDefault();  //prevent the default behaviour
+  var product = $(this).children('.product').val(); //get the values from the form
+  var price = $(this).children('.price').val();
+  var quantity = $(this).children('.quantity').val(); //get the invisible fields too
+  var subtotal = $(this).children('.subtotal').val();
+
+  //console.log(product, price, quantity, subtotal);
+
+  $('tbody').append('<tr>' + //append all the fields to the table in a new row
+    '<td class="product">' + product + '</td>' +
+    '<td class="price">' + randomPrice() + '</td>' +
+    //'<td class="price">' + price + '</td>' +
+    '<td class="quantity"><input type="number" value="' + quantity + '" /></td>' +
+    '<td class="subtotal">' + subtotal + '</td>' +
+    '<td><button class="btn btn-light btn-sm remove">Remove</button></td>' +
+  '</tr>');
+
+  updateTotal(); //call the function
+  $(this).children('.product').val(''); //and reset the fields to empty
+  $(this).children('.price').val('');
+  $(this).children('.quantity').val('');
+  $(this).children('.subtotal').val('');
+});
+
+}); //end .ready
