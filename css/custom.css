@@ -1,29 +1,54 @@
 body {
-  color: #000;
-  background-color: #ccffee;
-  background: url('../css/images/background1.jpg'); 
-}
-
-input {
-  width: 70px;
-}
-
-.pr-input {
-  width: 50rem;
+  color: #fff;
+  background-color: #286e56;
+  background: url('../css/images/background.jpg') no-repeat;
 }
 
 h2 {
   margin-left: .5rem;
 }
 
+/* table styles */
 .table {
   margin-left: 15px;
+  font-size: 2rem;
 }
 
+/* input styles */
+input {
+  width: 70px;
+  color: #000;
+}
+
+.pr-input {
+  width: 50rem;
+}
+
+/* button styles */
+button.remove {
+  color: #000;
+  background-color: #fff;
+}
+
+button.remove:hover  {
+  background-color: rgb(187, 184, 184);
+}
+
+button.add  {
+  background-color: #19524b;
+  border: 6px solid #19524b;
+}
+
+button.add:hover {
+  background-color: #286e56;
+  border: 6px solid #286e56;
+}
+
+/* form styles */
 #addProducts {
+  font-size: 2rem;
   margin-left: 2rem;
-  margin-right: 6rem;
+  margin-right: 8rem;
   display: flex;
   justify-content: space-between;
 }
-

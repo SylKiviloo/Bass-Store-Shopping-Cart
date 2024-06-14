@@ -1,17 +1,15 @@
 var updateSubtotal = function (ele) {
-  var price = parseFloat($(ele).find('.price').text()); //get the .price text and the .quantity input value
-  var quantity = parseFloat($(ele).find('.quantity input').val()); //(swap .children for .find for input)
-  
-  var subtotals = price * quantity; //calculate
+  var price = parseFloat($(ele).find('.price').text()); 
+  var quantity = parseFloat($(ele).find('.quantity input').val());
+  var subtotals = price * quantity;
   //console.log(subtotals)
-  $(ele).children('.subtotal').html(subtotals); //inject
-  
-  return subtotals;//return updated subtotal to DOM
+  $(ele).children('.subtotal').html(subtotals);
+  return subtotals;
 }
 
 var sum = function (acc, x) { return acc + x; };
 
-var updateTotal = function() { //a function to sum the subtotals and update the total
+var updateTotal = function() { 
   var subtotalArray = [];
   $('tbody tr').each(function (i, ele) {
     var subtotal = updateSubtotal(ele);
@@ -25,7 +23,7 @@ var updateTotal = function() { //a function to sum the subtotals and update the 
 var randomPrice = function () {
   var number = Math.random() * (3000 - 300) + 300;
   var randomNum = +number.toFixed(0);
-  //console.log(randomNum) //showing a random whole number
+  //console.log(randomNum)
   return randomNum;
 }
 randomPrice();
@@ -33,46 +31,43 @@ randomPrice();
 $(document).ready(function () {
   updateTotal();
 
-   $(document).on('click', '.btn.remove', function (event) {
+  $(document).on('click', '.btn.remove', function (event) {
     $(this).closest('tr').remove();
-    updateTotal(); //update after a row is removed
+    updateTotal();
   });
 
-  $('tr input').on('input', function () { //update upon input event
+  $('tr input').on('input', function () {
     updateTotal();
   });
 
   var timeout;
-  $(document).on('input', 'tr input', function () { //set debounce, change to document
+  $(document).on('input', 'tr input', function () { 
     clearTimeout(timeout);
     timeout = setTimeout(function () {
       updateTotal();
-    }, 1000);
-});
+    }, 500);
+  });
 
-$('#addProducts').on('submit', function (event) { //in #addProducts, on submit, run this function
-  event.preventDefault();  //prevent the default behaviour
-  var product = $(this).children('.product').val(); //get the values from the form
-  var price = $(this).children('.price').val();
-  var quantity = $(this).children('.quantity').val(); //get the invisible fields too
-  var subtotal = $(this).children('.subtotal').val();
+  $('#addProducts').on('submit', function (event) {
+    event.preventDefault();
+    var product = $(this).children('.product').val();
+    var quantity = $(this).children('.quantity').val();
+    var subtotal = $(this).children('.subtotal').val();
+    //console.log(product, price, quantity, subtotal);
 
-  //console.log(product, price, quantity, subtotal);
-
-  $('tbody').append('<tr>' + //append all the fields to the table in a new row
+  $('tbody').append('<tr>' + 
     '<td class="product">' + product + '</td>' +
     '<td class="price">' + randomPrice() + '</td>' +
-    //'<td class="price">' + price + '</td>' +
     '<td class="quantity"><input type="number" value="' + quantity + '" /></td>' +
     '<td class="subtotal">' + subtotal + '</td>' +
     '<td><button class="btn btn-light btn-sm remove">Remove</button></td>' +
   '</tr>');
 
-  updateTotal(); //call the function
-  $(this).children('.product').val(''); //and reset the fields to empty
+  updateTotal(); 
+  $(this).children('.product').val('');
   $(this).children('.price').val('');
   $(this).children('.quantity').val('');
   $(this).children('.subtotal').val('');
 });
 
-}); //end .ready
+});
