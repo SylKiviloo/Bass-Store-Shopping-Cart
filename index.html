@@ -26,43 +26,43 @@
                 <th scope="col">Product</th>
                 <th scope="col">Price (Cdn $)</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Subtotal</th>
+                <th scope="col">Subtotal (Cdn $)</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="product">Bass 1</td> <!--like ".name"-->
-                <td class="price">3500</td> <!--not an input. trying hard coded like ".name"-->
-                <td class="quantity"><input type="number" value="0" /></td> <!--input like ".shares"-->
-                <td class="subtotal"></td> <!--calculation/injection like ".marketValue"-->
-                <td><button class="remove btn btn-light btn-sm">Remove</button></td> <!--like remove button-->
-              </tr>
-              <tr>
-                <td class="product">Bass 2</td>
-                <td class="price">450</td>
-                <td class="quantity"><input type="number" value="0" /></td>
+                <td class="product">2002 Fender Precision Sunburst (used)</td> 
+                <td class="price">1575</td>
+                <td class="quantity"><input type="number" value="0" min="0" /></td>
                 <td class="subtotal"></td>
                 <td><button class="remove btn btn-light btn-sm">Remove</button></td>
               </tr>
               <tr>
-                <td class="product">Bass 3</td>
-                <td class="price">2100</td>
-                <td class="quantity"><input type="number" value="0" /></td>
+                <td class="product">2024 Squire Jazz Gloss Black</td>
+                <td class="price">350</td>
+                <td class="quantity"><input type="number" value="0" min="0" /></td>
                 <td class="subtotal"></td>
                 <td><button class="remove btn btn-light btn-sm">Remove</button></td>
               </tr>
               <tr>
-                <td class="product">Bass 4</td>
-                <td class="price">999</td>
-                <td class="quantity"><input type="number" value="0" /></td>
+                <td class="product">2024 Jay Turser P-Bass</td>
+                <td class="price">275</td>
+                <td class="quantity"><input type="number" value="0" min="0" /></td>
                 <td class="subtotal"></td>
                 <td><button class="remove btn btn-light btn-sm">Remove</button></td>
               </tr>
               <tr>
-                <td class="product">Bass 5</td>
-                <td class="price">225</td>
-                <td class="quantity"><input type="number" value="0" /></td>
+                <td class="product">2022 Ibanez SoundGear Blonde (used)</td>
+                <td class="price">550</td>
+                <td class="quantity"><input type="number" value="0" min="0" /></td>
+                <td class="subtotal"></td>
+                <td><button class="remove btn btn-light btn-sm">Remove</button></td>
+              </tr>
+              <tr>
+                <td class="product">1978 Fender Precision White (used)</td>
+                <td class="price">3199</td>
+                <td class="quantity"><input type="number" value="0" min="0" /></td>
                 <td class="subtotal"></td>
                 <td><button class="remove btn btn-light btn-sm">Remove</button></td>
               </tr>
@@ -70,14 +70,16 @@
           </table>
         </div>
           
-        <form class="col-12 mt-2 mb-4" id="addProducts"> <!---->
-          <input class="mx-2" name="product" type="text" placeholder="Bass Name" required/> <!---->
-          <input class="mx-2" name="price" type="number" placeholder="Price"/> <!---->
-          <button class="btn btn-primary btn-sm">Add</button>
+        <form class="col-12 mt-2 mb-4" id="addProducts">
+          <input class="product pr-input mx-2" type="text" placeholder="Bass Name" required/>
+          <input class="price mx-2 invisible" type="number" value="0" min="0"/>
+          <input class="quantity mx-2 invisible" type="number" value="0" min="0"/>
+          <input class="subtotal mx-2 invisible" type="number" value="0" min="0"/>
+          <button class="btn btn-primary btn-lg">Add</button>
         </form>
          
-        <div class="col-12 col-md-6"> <!--calculation/injection for total-->
-          <h3>Total: $ <span id="total"></span></h3> 
+        <div class="col-12 col-md-6">
+          <h2>Total: $ <span id="total"></span></h2> 
         </div>
         
       </div>
