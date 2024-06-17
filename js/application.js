@@ -53,7 +53,11 @@ $(document).ready(function () {
     var product = $(this).children('.product').val();
     var quantity = $(this).children('.quantity').val();
     var subtotal = $(this).children('.subtotal').val();
-    //console.log(product, price, quantity, subtotal);
+    //console.log(product, quantity, subtotal);
+
+  if (quantity === NaN || quantity === "") {
+    quantity = 0
+  }
 
   $('tbody').append('<tr>' + 
     '<td class="product">' + product + '</td>' +
