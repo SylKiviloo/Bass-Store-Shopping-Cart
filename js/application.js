@@ -1,6 +1,6 @@
 var updateSubtotal = function (ele) {
   var price = parseFloat($(ele).find('.price').text()); 
-  var quantity = parseFloat($(ele).find('.quantity input').val());
+  var quantity = parseFloat($(ele).find('.quantity input').val()) || 0;
   var subtotals = price * quantity;
   //console.log(subtotals)
   $(ele).children('.subtotal').html(subtotals);
@@ -55,15 +55,12 @@ $(document).ready(function () {
     var subtotal = $(this).children('.subtotal').val();
     //console.log(product, quantity, subtotal);
 
-  if (quantity === NaN || quantity === "") {
-    quantity = 0
-  }
-
+ 
   $('tbody').append('<tr>' + 
     '<td class="product">' + product + '</td>' +
     '<td class="price">' + randomPrice() + '</td>' +
     '<td class="quantity"><input type="number" value="' + quantity + '" /></td>' +
-    '<td class="subtotal">' + subtotal + '</td>' +
+    //'<td class="subtotal">' + subtotal + '</td>' +
     '<td><button class="btn btn-light btn-sm remove">Remove</button></td>' +
   '</tr>');
 
