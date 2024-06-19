@@ -60,7 +60,7 @@ $(document).ready(function () {
     '<td class="product">' + product + '</td>' +
     '<td class="price">' + randomPrice() + '</td>' +
     '<td class="quantity"><input type="number" value="' + quantity + '" /></td>' +
-    //'<td class="subtotal">' + subtotal + '</td>' +
+    '<td class="subtotal">' + subtotal + '</td>' +
     '<td><button class="btn btn-light btn-sm remove">Remove</button></td>' +
   '</tr>');
 
